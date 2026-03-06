@@ -551,6 +551,14 @@ button.disconnect:hover {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
+.grounding-links {
+  background-color: #e6f4ea;
+  color: #137333;
+  border: 1px solid #ceead6;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
 .tool-call {
   background-color: #fce8e6;
   color: #c5221f;

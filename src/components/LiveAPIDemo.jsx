@@ -230,6 +230,13 @@ Instructions:
           });
           break;
         }
+        case MultimodalLiveResponseType.GROUNDING_METADATA: {
+          const linksText = message.data
+            .map((l) => `• ${l.title ? l.title + ": " : ""}${l.uri}`)
+            .join("\n");
+          addMessage(`🔗 Sources:\n${linksText}`, "grounding-links");
+          break;
+        }
         case MultimodalLiveResponseType.TURN_COMPLETE:
           // Turn complete
           break;

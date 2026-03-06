@@ -13,6 +13,7 @@ export const MultimodalLiveResponseType = {
   ERROR: "ERROR",
   INPUT_TRANSCRIPTION: "INPUT_TRANSCRIPTION",
   OUTPUT_TRANSCRIPTION: "OUTPUT_TRANSCRIPTION",
+  GROUNDING_METADATA: "GROUNDING_METADATA",
 };
 
 /**
@@ -257,6 +258,20 @@ export class GeminiLiveAPI {
     const messageData = JSON.parse(messageEvent.data);
     const message = new MultimodalLiveResponseMessage(messageData);
     this.onReceiveResponse(message);
+
+    // Emit grounding links separately if Google Search was used
+    const groundingChunks = messageData?.serverContent?.groundingMetadata?.groundingChunks;
+    if (groundingChunks?.length) {
+      const links = groundingChunks
+        .map(chunk => ({ uri: chunk.web?.uri, title: chunk.web?.title }))
+        .filter(link => link.uri);
+      if (links.length) {
+        this.onReceiveResponse({
+          type: MultimodalLiveResponseType.GROUNDING_METADATA,
+          data: links,
+        });
+      }
+    }
   }
 
   setupWebSocketToService() {
