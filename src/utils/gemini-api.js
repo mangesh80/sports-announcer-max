@@ -345,7 +345,7 @@ export class GeminiLiveAPI {
       console.log(
         "Google Grounding enabled, removing custom function calls if any."
       );
-      delete sessionSetupMessage.setup.tools.function_declarations;
+      //delete sessionSetupMessage.setup.tools.function_declarations;
     }
 
     // Add affective dialog if enabled
