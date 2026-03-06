@@ -552,29 +552,49 @@ button.disconnect:hover {
 }
 
 .grounding-links {
-  background-color: #e6f4ea;
-  color: #137333;
-  border: 1px solid #ceead6;
+  background-color: #e8f5e9;
+  color: #1b5e20;
+  border: 1px solid #a5d6a7;
+  border-left: 3px solid #2e7d32;
+  padding: 10px 12px !important;
+}
+
+.grounding-links span {
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #2e7d32;
+  display: block;
+  margin-bottom: 6px;
 }
 
 .grounding-links a {
-  color: #137333;
+  color: #1a73e8;
   text-decoration: underline;
   word-break: break-word;
+  cursor: pointer;
+  font-size: 0.875rem;
 }
 
 .grounding-links a:hover {
-  color: #0b5c2a;
+  color: #1557b0;
+  text-decoration: underline;
 }
 
 .sources-list {
-  margin-top: 6px;
+  margin-top: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .source-item {
-  margin-top: 4px;
-  font-size: 0.85rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
   line-height: 1.4;
+  font-size: 0.875rem;
 }
 
 .tool-call {

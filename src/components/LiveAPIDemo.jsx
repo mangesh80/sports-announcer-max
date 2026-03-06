@@ -847,9 +847,9 @@ Instructions:
                           <div className="sources-list">
                             {msg.links.map((link, i) => (
                               <div key={i} className="source-item">
-                                •{" "}
+                                <span style={{color:"#2e7d32", flexShrink:0}}>{i + 1}.</span>
                                 <a href={link.uri} target="_blank" rel="noopener noreferrer">
-                                  {link.title || link.uri}
+                                  {link.title || link.uri} ↗
                                 </a>
                               </div>
                             ))}
@@ -954,9 +954,9 @@ Instructions:
                       <div className="sources-list">
                         {msg.links.map((link, i) => (
                           <div key={i} className="source-item">
-                            •{" "}
+                            <span style={{color:"#2e7d32", flexShrink:0}}>{i + 1}.</span>
                             <a href={link.uri} target="_blank" rel="noopener noreferrer">
-                              {link.title || link.uri}
+                              {link.title || link.uri} ↗
                             </a>
                           </div>
                         ))}
