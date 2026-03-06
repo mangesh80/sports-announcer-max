@@ -254,8 +254,8 @@ export class GeminiLiveAPI {
   }
 
   onReceiveMessage(messageEvent) {
-    // console.log("Message received: ", messageEvent);
     const messageData = JSON.parse(messageEvent.data);
+
     const message = new MultimodalLiveResponseMessage(messageData);
     this.onReceiveResponse(message);
 

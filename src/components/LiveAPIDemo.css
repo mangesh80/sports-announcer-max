@@ -555,8 +555,26 @@ button.disconnect:hover {
   background-color: #e6f4ea;
   color: #137333;
   border: 1px solid #ceead6;
-  white-space: pre-wrap;
-  word-break: break-all;
+}
+
+.grounding-links a {
+  color: #137333;
+  text-decoration: underline;
+  word-break: break-word;
+}
+
+.grounding-links a:hover {
+  color: #0b5c2a;
+}
+
+.sources-list {
+  margin-top: 6px;
+}
+
+.source-item {
+  margin-top: 4px;
+  font-size: 0.85rem;
+  line-height: 1.4;
 }
 
 .tool-call {

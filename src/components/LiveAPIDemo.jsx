@@ -139,7 +139,7 @@ Instructions:
       }
     }, [chatMessages]);
 
-    const addMessage = (text, type, mode = "add", isFinished = false) => {
+    const addMessage = (text, type, mode = "add", isFinished = false, links = null) => {
       setChatMessages((prev) => {
         // Check if we can modify the last message
         if (
@@ -170,9 +170,9 @@ Instructions:
 
         // Create new message
         // Don't create empty messages
-        if ((!text || text.trim().length === 0) && !isFinished) return prev;
+        if ((!text || text.trim().length === 0) && !links && !isFinished) return prev;
 
-        return [...prev, { text: text || "", type, isFinished }];
+        return [...prev, { text: text || "", type, isFinished, links }];
       });
     };
 
@@ -231,10 +231,9 @@ Instructions:
           break;
         }
         case MultimodalLiveResponseType.GROUNDING_METADATA: {
-          const linksText = message.data
-            .map((l) => `• ${l.title ? l.title + ": " : ""}${l.uri}`)
-            .join("\n");
-          addMessage(`🔗 Sources:\n${linksText}`, "grounding-links");
+          if (message.data && message.data.length > 0) {
+            addMessage("🔗 Sources:", "grounding-links", "add", true, message.data);
+          }
           break;
         }
         case MultimodalLiveResponseType.TURN_COMPLETE:
@@ -842,7 +841,23 @@ Instructions:
                   )}
                   {chatMessages.map((msg, index) => (
                     <div key={index} className={`message ${msg.type}`}>
-                      {msg.text}
+                      {msg.links && msg.links.length > 0 ? (
+                        <>
+                          <span>{msg.text}</span>
+                          <div className="sources-list">
+                            {msg.links.map((link, i) => (
+                              <div key={i} className="source-item">
+                                •{" "}
+                                <a href={link.uri} target="_blank" rel="noopener noreferrer">
+                                  {link.title || link.uri}
+                                </a>
+                              </div>
+                            ))}
+                          </div>
+                        </>
+                      ) : (
+                        msg.text
+                      )}
                     </div>
                   ))}
                 </div>
@@ -933,7 +948,23 @@ Instructions:
               )}
               {chatMessages.map((msg, index) => (
                 <div key={index} className={`message ${msg.type}`}>
-                  {msg.text}
+                  {msg.links && msg.links.length > 0 ? (
+                    <>
+                      <span>{msg.text}</span>
+                      <div className="sources-list">
+                        {msg.links.map((link, i) => (
+                          <div key={i} className="source-item">
+                            •{" "}
+                            <a href={link.uri} target="_blank" rel="noopener noreferrer">
+                              {link.title || link.uri}
+                            </a>
+                          </div>
+                        ))}
+                      </div>
+                    </>
+                  ) : (
+                    msg.text
+                  )}
                 </div>
               ))}
             </div>
